@@ -69,6 +69,30 @@
   width: 40%;
   height: 300px;
 }
+.one-item-layout-listing .description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .one-item-layout-listing .horse-listing__card--description {
   padding: 16px 20px;
+}
+
+.product_page__description-title {
+  font-weight: bold;
+}
+
+.more-details__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.more-details__column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }/*# sourceMappingURL=listing.css.map */

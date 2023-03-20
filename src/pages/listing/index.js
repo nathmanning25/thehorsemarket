@@ -29,7 +29,7 @@ const Horse = () => {
           >
             {horseData.map((horse) => (
               <Link
-                href={"/listing/" + horse.id}
+                href={`listing/${horse.id}`}
                 key={horse.id}
                 className={
                   isActive
@@ -40,7 +40,9 @@ const Horse = () => {
                 <div className="placeholder-img">250px</div>
                 <div className="horse-listing__card--description">
                   <h3>{horse.name}</h3>
-                  <p>{isActive ? horse.description : ""}</p>
+                  <p className="description">
+                    {isActive ? horse.description : ""}
+                  </p>
                   <p>{horse.breed}</p>
                   <p>{horse.price}</p>
                 </div>
