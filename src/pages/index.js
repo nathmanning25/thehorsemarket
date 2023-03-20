@@ -1,9 +1,5 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+import Head from "next/head";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -15,8 +11,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-          <h1>wsadasdadn</h1>
+        <h1>TheHorseMarket</h1>
+        <p>quick links</p>
+        <Link href={"/listing/"}>
+          <h3>Listing page</h3>
+        </Link>
       </main>
     </>
-  )
+  );
 }
