@@ -1,20 +1,12 @@
 import { horseData } from "../../pages/api/horsedata";
 import { useState } from "react";
 
-const EditListing = () => {
-  const [isActive, setActive] = useState("");
-
-  const ToggleLayout3Items = () => {
-    setActive(!isActive);
-  };
-
+const EditListing = (props) => {
   return (
     <div>
       <div className="edit-listing-bar">
         <div className="edit-listing-bar__sort">
-          <button onClick={ToggleLayout3Items}>
-            1 item lengthways per row
-          </button>
+          <button onClick={props.active}>1 item lengthways per row</button>
         </div>
 
         <div className="edit-listing-bar__filters">

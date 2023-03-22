@@ -3,18 +3,17 @@ import { useState } from "react";
 import Link from "next/link";
 
 const HorseProducts = (props) => {
-  const [isActive, setActive] = useState("");
-
-  const ToggleLayout3Items = () => {
-    setActive(!isActive);
-  };
   return (
     <div>
-      {props.data.map((horse) => (
+      {props.horseItems.map((horse) => (
         <Link
           href={`listing/${horse.id}`}
           key={horse.id}
-          className="one-item-layout-listing"
+          className={
+            props.isActive
+              ? "one-item-layout-listing"
+              : "horse-listing__card flex-grow flex-item"
+          }
         >
           <div className="placeholder-img">250px</div>
           <div className="horse-listing__card--description">

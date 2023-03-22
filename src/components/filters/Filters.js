@@ -1,19 +1,26 @@
 import React from "react";
 import { useState } from "react";
+import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
 import EditListing from "../layout/editListingLayout";
 
-const Filters = (props) => {
-  const [horseItems, setHorseItems] = useState(props.horseData);
+const Filters = () => {
+  const [horseItems, setHorseItems] = useState(horseData);
   const [isActive, setActive] = useState("");
 
-  const ToggleLayout3Items = () => {
+  function setTest() {
     setActive(!isActive);
+  }
+
+  let props = {
+    horseItems: horseItems,
+    isActive: isActive,
   };
 
   return (
     <div>
-      <EditListing toggleListings={isActive} />
+      <EditListing active={setTest} />
+
       <div className="flex-wrapper">
         <div className="filters-wrapper">
           <div className="filters-section filters-title">
@@ -39,7 +46,7 @@ const Filters = (props) => {
           <div className="filters-section filters-title">Price</div>
           <div className="filters-section filters-title">Gender</div>
         </div>
-        <HorseProducts data={horseItems} />
+        <HorseProducts {...props} />
       </div>
     </div>
   );
