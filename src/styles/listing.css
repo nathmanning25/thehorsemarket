@@ -1,5 +1,6 @@
 .horse-listing {
   display: flex;
+  flex-wrap: wrap;
   -moz-column-gap: 15px;
        column-gap: 15px;
   row-gap: 15px;
@@ -14,7 +15,7 @@
 }
 
 .flex-grow {
-  flex-grow: 1;
+  flex: 1 0 21%;
 }
 
 .flex-item {
@@ -31,6 +32,37 @@
   height: 150px;
   background-color: #c4c0bf;
   justify-content: space-around;
+}
+
+.flex-wrapper {
+  display: flex;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+
+.filters-wrapper {
+  width: 25%;
+}
+
+.filters-section {
+  margin-bottom: 2rem;
+}
+
+.filters-title {
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+
+.sortBy {
+  background: none;
+  border: none;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  text-align: left;
+  padding-left: 0;
+}
+.sortBy:hover {
+  color: red;
 }
 
 .edit-listing-bar {

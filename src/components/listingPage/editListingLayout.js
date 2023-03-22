@@ -1,3 +1,5 @@
+import { horseData } from "../../pages/api/horsedata";
+
 const EditListing = ({ ToggleLayout3Items }) => {
   return (
     <div>
@@ -9,13 +11,7 @@ const EditListing = ({ ToggleLayout3Items }) => {
         </div>
 
         <div className="edit-listing-bar__filters">
-          <p>Showing: results</p>
-          <p>Sort by:</p>
-          <select id="filter" name="horseFilter">
-            <option value=""></option>
-            <option value="">Sort by price Low - High</option>
-            <option value="">Sort by price High - Low</option>
-          </select>
+          <p>Showing: {horseData.length} results</p>
         </div>
       </div>
     </div>
