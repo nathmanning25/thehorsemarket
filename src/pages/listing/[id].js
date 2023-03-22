@@ -33,7 +33,7 @@ const test = ({ horse }) => (
         <h2>More details</h2>
         <div className="more-details__wrapper">
           <div className="more-details__column">
-            <p>Name: {horse.name}</p>
+            <p>{horse.name}</p>
             <p>Category: {horse.category}</p>
             <p>Breed: {horse.breed}</p>
           </div>
