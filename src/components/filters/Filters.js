@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
@@ -8,7 +7,7 @@ const Filters = () => {
   const [horseItems, setHorseItems] = useState(horseData);
   const [isActive, setActive] = useState("");
 
-  function setTest() {
+  function singleListing() {
     setActive(!isActive);
   }
 
@@ -19,7 +18,7 @@ const Filters = () => {
 
   return (
     <div>
-      <EditListing active={setTest} />
+      <EditListing active={singleListing} />
 
       <div className="flex-wrapper">
         <div className="filters-wrapper">

@@ -1,5 +1,4 @@
 import { horseData } from "../../pages/api/horsedata";
-import { useState } from "react";
 
 const EditListing = (props) => {
   return (
