@@ -1,6 +1,13 @@
 import { horseData } from "../../pages/api/horsedata";
+import { useState } from "react";
 
-const EditListing = ({ ToggleLayout3Items }) => {
+const EditListing = () => {
+  const [isActive, setActive] = useState("");
+
+  const ToggleLayout3Items = () => {
+    setActive(!isActive);
+  };
+
   return (
     <div>
       <div className="edit-listing-bar">
