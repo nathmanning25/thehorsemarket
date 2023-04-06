@@ -15,7 +15,7 @@
 }
 
 .flex-grow {
-  flex: 1 0 21%;
+  flex: 1 0 30%;
 }
 
 .flex-item {
@@ -36,11 +36,11 @@
 
 .flex-wrapper {
   display: flex;
-  column-gap: 20px;
+  column-gap: 50px;
 }
 
 .filters-wrapper {
-  width: 25%;
+  width: 55rem;
 }
 
 .filters-section {
@@ -50,6 +50,13 @@
 .filters-title {
   padding-top: 10px;
   border-top: 1px solid black;
+}
+
+.filters-checkbox {
+  label {
+    display: block;
+    margin-bottom: 2rem;
+  }
 }
 
 .sortBy {

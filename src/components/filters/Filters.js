@@ -2,6 +2,9 @@ import { useState } from "react";
 import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
 import EditListing from "../layout/editListingLayout";
+import breedCount from "../../pages/api/horsedata";
+import CheckboxFilter from "../testComponents/TestFilters";
+import result from "../../pages/api/horsedata";
 
 const Filters = () => {
   const [horseItems, setHorseItems] = useState(horseData);
@@ -41,11 +44,37 @@ const Filters = () => {
               Price high to low
             </button>
           </div>
-          <div className="filters-section filters-title">Breed</div>
+          <div className="filters-section filters-title">
+            Breed
+            <div>
+              <form className="filters-checkbox">
+                {result.map((breed) => {
+                  return (
+                    <div key="x">
+                      <input
+                        type="checkbox"
+                        value={breed.name}
+                        onClick={() =>
+                          setHorseItems(
+                            [...horseItems].filter(
+                              (horseData) => horseData.breed === breed.name
+                            )
+                          )
+                        }
+                      />
+                      {breed.name} - ({breed.count})
+                    </div>
+                  );
+                })}
+              </form>
+            </div>
+          </div>
+
           <div className="filters-section filters-title">Price</div>
           <div className="filters-section filters-title">Gender</div>
         </div>
         <HorseProducts {...props} />
+        {/*  <CheckboxFilter /> */}
       </div>
     </div>
   );

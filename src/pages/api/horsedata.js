@@ -45,7 +45,7 @@ export const horseData = [
   {
     id: 6,
     name: "Clay",
-    breed: "KWPN",
+    breed: "Cob",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: "13",
   },
@@ -63,4 +63,29 @@ export const horseData = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     price: "13",
   },
+  {
+    id: 9,
+    name: "Jammie",
+    breed: "Irish Draught",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    price: "11233",
+  },
 ];
+
+const countByKey = (arr, key) => {
+  const counts = {};
+  for (let i = 0; i < arr.length; i++) {
+    const value = arr[i][key];
+    counts[value] = counts[value] ? counts[value] + 1 : 1;
+  }
+  return counts;
+};
+
+const result = [];
+const counts = countByKey(horseData, "breed");
+for (const [key, value] of Object.entries(counts)) {
+  result.push({ name: key, count: value });
+}
+console.log(result);
+
+export default result;
