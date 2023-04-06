@@ -7,6 +7,7 @@ import CheckboxFilter from "../testComponents/TestFilters";
 import result from "../../pages/api/horsedata";
 
 const Filters = () => {
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [horseItems, setHorseItems] = useState(horseData);
   const [isActive, setActive] = useState("");
 
