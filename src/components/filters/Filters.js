@@ -6,19 +6,27 @@ import EditListing from "../layout/editListingLayout";
 const priceRanges = [
   {
     id: 1,
-    value: "0-15",
+    value: "0-500",
   },
   {
     id: 2,
-    value: "15-50",
+    value: "501-1000",
   },
   {
     id: 3,
-    value: "50-500",
+    value: "1001-3000",
   },
   {
     id: 4,
-    value: "500-5000",
+    value: "3001-5000",
+  },
+  {
+    id: 5,
+    value: "5001-10000",
+  },
+  {
+    id: 6,
+    value: "10001-15000",
   },
 ];
 
@@ -30,6 +38,25 @@ const gender = [
   {
     id: 2,
     value: "Female",
+  },
+];
+
+const colour = [
+  {
+    id: 1,
+    colour: "Tan",
+  },
+  {
+    id: 2,
+    colour: "Black",
+  },
+  {
+    id: 3,
+    colour: "tan",
+  },
+  {
+    id: 4,
+    colour: "tan",
   },
 ];
 
@@ -146,27 +173,30 @@ const Filters = () => {
 
       <div className="flex-wrapper">
         <div className="filters-wrapper">
-          <div className="filters-section filters-title">
-            <button onClick={clearAllCheckboxes}>Clear All Filters</button>
-            <div className="filters-section filters-title">
+          <div>
+            <div>
               <div>
-                <h3>Applied Filters</h3>
                 {appliedFilters.length > 0 ? (
-                  <ul>
+                  <div className="filters-section filters-title">
+                    <button onClick={clearAllCheckboxes}>
+                      Clear All Filters
+                    </button>
+
+                    <h3>Applied Filters</h3>
                     {appliedFilters.map((filter, index) => (
-                      <li key={index}>
-                        {filter}{" "}
+                      <span className="applied-filters" key={index}>
+                        {filter}
                         <span
                           className="remove-filter"
                           onClick={() => handleRemoveFilter(filter)}
                         >
                           X
                         </span>
-                      </li>
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 ) : (
-                  <p>No filters applied</p>
+                  <p></p>
                 )}
               </div>
             </div>

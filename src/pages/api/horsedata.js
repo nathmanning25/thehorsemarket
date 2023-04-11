@@ -19,6 +19,7 @@ export const horseData = [
     name: "Kayzee",
     breed: "British Warmblood",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    colour: "Tan",
     gender: "Male",
     price: "50",
   },
