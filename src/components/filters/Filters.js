@@ -2,18 +2,31 @@ import { useState } from "react";
 import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
 import EditListing from "../layout/editListingLayout";
-import breedCount from "../../pages/api/horsedata";
-import CheckboxFilter from "../testComponents/TestFilters";
 import result from "../../pages/api/horsedata";
+import List from "./TestFilters";
 
 const Filters = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [horseItems, setHorseItems] = useState(horseData);
+  const [isChecked, setIsChecked] = useState(true);
   const [isActive, setActive] = useState("");
 
   function singleListing() {
     setActive(!isActive);
   }
+
+  let handleCheckbox = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      setHorseItems(horseData);
+    }
+  };
+
+  const handleCatergoryChange = (e) => {
+    const category = e.target.value;
+    setHorseItems(
+      [...horseItems].filter((horseData) => horseData.breed === category)
+    );
+  };
 
   let props = {
     horseItems: horseItems,
@@ -46,22 +59,18 @@ const Filters = () => {
             </button>
           </div>
           <div className="filters-section filters-title">
-            Breed
+            <b>Breed</b>
             <div>
-              <form className="filters-checkbox">
+              <form>
                 {result.map((breed) => {
                   return (
-                    <div key="x">
+                    <div className="filters-checkbox" key="x">
                       <input
                         type="checkbox"
                         value={breed.name}
-                        onClick={() =>
-                          setHorseItems(
-                            [...horseItems].filter(
-                              (horseData) => horseData.breed === breed.name
-                            )
-                          )
-                        }
+                        onCheck={isChecked}
+                        onChange={handleCheckbox}
+                        onClick={handleCatergoryChange}
                       />
                       {breed.name} - ({breed.count})
                     </div>
@@ -75,7 +84,6 @@ const Filters = () => {
           <div className="filters-section filters-title">Gender</div>
         </div>
         <HorseProducts {...props} />
-        {/*  <CheckboxFilter /> */}
       </div>
     </div>
   );
