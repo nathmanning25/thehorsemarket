@@ -19,6 +19,7 @@ export const horseData = [
     name: "Kayzee",
     breed: "British Warmblood",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Male",
     price: "50",
   },
   {
@@ -26,6 +27,7 @@ export const horseData = [
     name: "Summer Breeze",
     breed: "Cob",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Female",
     price: "9725",
   },
   {
@@ -33,6 +35,7 @@ export const horseData = [
     name: "Jami",
     breed: "Selle Francais",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Female",
     price: "15123112313",
   },
   {
@@ -40,13 +43,15 @@ export const horseData = [
     name: "Mountbrown Minstrel",
     breed: "Irish Draught",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "13",
+    gender: "Female",
+    price: "320",
   },
   {
     id: 6,
     name: "Clay",
     breed: "Cob",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Male",
     price: "13",
   },
   {
@@ -54,6 +59,7 @@ export const horseData = [
     name: "Veradis",
     breed: "Selle Francais",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Male",
     price: "13",
   },
   {
@@ -61,14 +67,32 @@ export const horseData = [
     name: "Jammie",
     breed: "Irish Draught",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "13",
+    gender: "Male",
+    price: "499",
   },
   {
     id: 9,
     name: "Jammie",
     breed: "Irish Draught",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    price: "11233",
+    gender: "Male",
+    price: "233",
+  },
+  {
+    id: 10,
+    name: "Roger",
+    breed: "British Warmblood",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Male",
+    price: "1230",
+  },
+  {
+    id: 11,
+    name: "Toger",
+    breed: "British Warmblood",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    gender: "Female",
+    price: "3230",
   },
 ];
 
@@ -86,6 +110,6 @@ const counts = countByKey(horseData, "breed");
 for (const [key, value] of Object.entries(counts)) {
   result.push({ name: key, count: value });
 }
-console.log(result);
+console.log("result", result);
 
 export default result;

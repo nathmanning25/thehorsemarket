@@ -1,14 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
 import EditListing from "../layout/editListingLayout";
 import result from "../../pages/api/horsedata";
-import List from "./TestFilters";
+
+import ShoppingList from "./TestFilters";
 
 const Filters = () => {
   const [horseItems, setHorseItems] = useState(horseData);
   const [isChecked, setIsChecked] = useState(true);
+  const [isCheckedPrice, setIsCheckedPrice] = useState(true);
+
   const [isActive, setActive] = useState("");
+
+  useEffect(() => {
+    const checkboxes = document.querySelectorAll(".checkbox");
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener("click", (e) => {
+        if (e.target.checked) {
+          checkboxes.forEach((otherCheckbox) => {
+            if (otherCheckbox !== checkbox) {
+              otherCheckbox.disabled = true;
+            }
+          });
+        } else {
+          checkboxes.forEach((otherCheckbox) => {
+            if (otherCheckbox !== checkbox) {
+              otherCheckbox.disabled = false;
+            }
+          });
+        }
+      });
+    });
+  });
 
   function singleListing() {
     setActive(!isActive);
@@ -16,15 +40,26 @@ const Filters = () => {
 
   let handleCheckbox = () => {
     setIsChecked(!isChecked);
+
     if (!isChecked) {
       setHorseItems(horseData);
     }
   };
 
+  let handleRemovePrice = () => {
+    setIsCheckedPrice(!isCheckedPrice);
+
+    if (!isCheckedPrice) {
+      setHorseItems(
+        [...horseData].filter((item) => item.price >= 0 && item.price <= 500)
+      );
+    }
+  };
+
   const handleCatergoryChange = (e) => {
-    const category = e.target.value;
+    const breed = e.target.value;
     setHorseItems(
-      [...horseItems].filter((horseData) => horseData.breed === category)
+      [...horseItems].filter((horseData) => horseData.breed === breed)
     );
   };
 
@@ -64,8 +99,9 @@ const Filters = () => {
               <form>
                 {result.map((breed) => {
                   return (
-                    <div className="filters-checkbox" key="x">
+                    <div className="filters-checkbox" key={breed.name}>
                       <input
+                        className="checkbox"
                         type="checkbox"
                         value={breed.name}
                         onCheck={isChecked}
@@ -81,9 +117,42 @@ const Filters = () => {
           </div>
 
           <div className="filters-section filters-title">Price</div>
-          <div className="filters-section filters-title">Gender</div>
+          <div className="filters-section filters-title">
+            Gender
+            <form>
+              <input
+                type="checkbox"
+                className=""
+                onCheck={isCheckedPrice}
+                onChange={handleRemovePrice}
+                onClick={() =>
+                  setHorseItems(
+                    [...horseItems].filter(
+                      (item) => item.price >= 0 && item.price <= 500
+                    )
+                  )
+                }
+              ></input>
+              Male
+              <input
+                type="checkbox"
+                className=""
+                onCheck={isCheckedPrice}
+                onChange={handleRemovePrice}
+                onClick={() =>
+                  setHorseItems(
+                    [...horseItems].filter(
+                      (item) => item.price >= 0 && item.price <= 500
+                    )
+                  )
+                }
+              ></input>
+              Female
+            </form>
+          </div>
         </div>
         <HorseProducts {...props} />
+        <ShoppingList />
       </div>
     </div>
   );
