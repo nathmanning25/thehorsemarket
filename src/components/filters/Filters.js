@@ -51,13 +51,23 @@ const Filters = () => {
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [priceFilters, setPriceFilters] = useState([]);
   const [genderFilters, setGenderFilters] = useState([]);
+  const [appliedFilters, setAppliedFilters] = useState([]);
+
+  const clearAllCheckboxes = () => {
+    setCategoryFilters([]);
+    setPriceFilters([]);
+    setGenderFilters([]);
+    setAppliedFilters([]);
+  };
 
   const handleCategoryChange = (e) => {
     const breed = e.target.value;
     if (e.target.checked) {
       setCategoryFilters([...categoryFilters, breed]);
+      setAppliedFilters([...appliedFilters, breed]);
     } else {
       setCategoryFilters(categoryFilters.filter((c) => c !== breed));
+      setAppliedFilters(appliedFilters.filter((f) => f !== breed));
     }
   };
 
@@ -65,8 +75,10 @@ const Filters = () => {
     const priceRange = e.target.value;
     if (e.target.checked) {
       setPriceFilters([...priceFilters, priceRange]);
+      setAppliedFilters([...appliedFilters, priceRange]);
     } else {
       setPriceFilters(priceFilters.filter((p) => p !== priceRange));
+      setAppliedFilters(appliedFilters.filter((f) => f !== priceRange));
     }
   };
 
@@ -74,8 +86,22 @@ const Filters = () => {
     const gender = e.target.value;
     if (e.target.checked) {
       setGenderFilters([...genderFilters, gender]);
+      setAppliedFilters([...appliedFilters, gender]);
     } else {
       setGenderFilters(genderFilters.filter((p) => p !== gender));
+      setAppliedFilters(appliedFilters.filter((f) => f !== gender));
+    }
+  };
+
+  const handleRemoveFilter = (filterValue) => {
+    setAppliedFilters(appliedFilters.filter((f) => f !== filterValue));
+
+    if (categoryFilters.includes(filterValue)) {
+      setCategoryFilters(categoryFilters.filter((f) => f !== filterValue));
+    } else if (priceFilters.includes(filterValue)) {
+      setPriceFilters(priceFilters.filter((f) => f !== filterValue));
+    } else if (genderFilters.includes(filterValue)) {
+      setGenderFilters(genderFilters.filter((f) => f !== filterValue));
     }
   };
 
@@ -120,7 +146,31 @@ const Filters = () => {
 
       <div className="flex-wrapper">
         <div className="filters-wrapper">
-          <div className="filters-section filters-title"></div>
+          <div className="filters-section filters-title">
+            <button onClick={clearAllCheckboxes}>Clear All Filters</button>
+            <div className="filters-section filters-title">
+              <div>
+                <h3>Applied Filters</h3>
+                {appliedFilters.length > 0 ? (
+                  <ul>
+                    {appliedFilters.map((filter, index) => (
+                      <li key={index}>
+                        {filter}{" "}
+                        <span
+                          className="remove-filter"
+                          onClick={() => handleRemoveFilter(filter)}
+                        >
+                          X
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No filters applied</p>
+                )}
+              </div>
+            </div>
+          </div>
           <div className="filters-section filters-title">
             <div>
               <h3>Category</h3>
