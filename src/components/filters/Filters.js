@@ -2,17 +2,35 @@ import { useState, useEffect } from "react";
 import { horseData } from "../../pages/api/horsedata";
 import HorseProducts from "../listingPage/HorseProducts";
 import EditListing from "../layout/editListingLayout";
-import result from "../../pages/api/horsedata";
 
-import ShoppingList from "./TestFilters";
+const priceRanges = [
+  {
+    id: 1,
+    value: "0-15",
+  },
+  {
+    id: 2,
+    value: "15-50",
+  },
+  {
+    id: 3,
+    value: "50-500",
+  },
+  {
+    id: 4,
+    value: "500-5000",
+  },
+];
 
-const products = [
-  { name: "Product 1", category: "Category A", price: 10 },
-  { name: "Product 2", category: "Category A", price: 15 },
-  { name: "Product 3", category: "Category B", price: 20 },
-  { name: "Product 4", category: "Category B", price: 25 },
-  { name: "Product 5", category: "Category C", price: 30 },
-  { name: "Product 6", category: "Category C", price: 35 },
+const gender = [
+  {
+    id: 1,
+    value: "Male",
+  },
+  {
+    id: 2,
+    value: "Female",
+  },
 ];
 
 const countBy = (arr, key) =>
@@ -32,33 +50,57 @@ const Filters = () => {
 
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [priceFilters, setPriceFilters] = useState([]);
+  const [genderFilters, setGenderFilters] = useState([]);
 
   const handleCategoryChange = (e) => {
-    const category = e.target.value;
+    const breed = e.target.value;
     if (e.target.checked) {
-      setCategoryFilters([...categoryFilters, category]);
+      setCategoryFilters([...categoryFilters, breed]);
     } else {
-      setCategoryFilters(categoryFilters.filter((c) => c !== category));
+      setCategoryFilters(categoryFilters.filter((c) => c !== breed));
     }
   };
 
   const handlePriceChange = (e) => {
-    const price = parseInt(e.target.value);
+    const priceRange = e.target.value;
     if (e.target.checked) {
-      setPriceFilters([...priceFilters, price]);
+      setPriceFilters([...priceFilters, priceRange]);
     } else {
-      setPriceFilters(priceFilters.filter((p) => p !== price));
+      setPriceFilters(priceFilters.filter((p) => p !== priceRange));
     }
   };
 
-  const filteredProducts = products.filter((product) => {
+  const handleGenderChange = (e) => {
+    const gender = e.target.value;
+    if (e.target.checked) {
+      setGenderFilters([...genderFilters, gender]);
+    } else {
+      setGenderFilters(genderFilters.filter((p) => p !== gender));
+    }
+  };
+
+  const filteredProducts = horseData.filter((product) => {
     if (
       categoryFilters.length > 0 &&
-      !categoryFilters.includes(product.category)
+      !categoryFilters.includes(product.breed)
     ) {
       return false;
     }
-    if (priceFilters.length > 0 && !priceFilters.includes(product.price)) {
+
+    if (genderFilters.length > 0 && !genderFilters.includes(product.gender)) {
+      return false;
+    }
+
+    if (
+      priceFilters.length > 0 &&
+      !priceFilters.some((range) => {
+        const [min, max] = range.split("-");
+        return (
+          parseInt(product.price) >= parseInt(min) &&
+          parseInt(product.price) <= parseInt(max)
+        );
+      })
+    ) {
       return false;
     }
     return true;
@@ -69,8 +111,8 @@ const Filters = () => {
     isActive: isActive,
   };
 
-  const categoryCounts = countBy(products, "category");
-  const priceCounts = countBy(products, "price");
+  const categoryCounts = countBy(horseData, "breed");
+  const priceCounts = countBy(priceRanges, "value");
 
   return (
     <div>
@@ -78,25 +120,7 @@ const Filters = () => {
 
       <div className="flex-wrapper">
         <div className="filters-wrapper">
-          <div className="filters-section filters-title">
-            Sort by:
-            <button
-              className="sortBy"
-              onClick={() =>
-                setHorseItems([...horseItems].sort((a, b) => a.price - b.price))
-              }
-            >
-              Price low to high
-            </button>
-            <button
-              className="sortBy"
-              onClick={() =>
-                setHorseItems([...horseItems].sort((a, b) => b.price - a.price))
-              }
-            >
-              Price high to low
-            </button>
-          </div>
+          <div className="filters-section filters-title"></div>
           <div className="filters-section filters-title">
             <div>
               <h3>Category</h3>
@@ -113,23 +137,37 @@ const Filters = () => {
               ))}
             </div>
           </div>
-          <div>
-            <h3>Price</h3>
-            {Object.keys(priceCounts).map((price, index) => (
+
+          <div className="filters-section filters-title">
+            <div>
+              <h3>Price</h3>
+              {priceRanges.map((range, index) => (
+                <label key={index}>
+                  <input
+                    type="checkbox"
+                    value={range.value}
+                    onChange={handlePriceChange}
+                    checked={priceFilters.includes(range.value)}
+                  />
+                  {range.value} ({priceCounts[range.value]})
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="filters-section filters-title">
+            <h3>Gender</h3>
+            {gender.map((gender, index) => (
               <label key={index}>
                 <input
                   type="checkbox"
-                  value={price}
-                  onChange={handlePriceChange}
-                  checked={priceFilters.includes(parseInt(price))}
+                  value={gender.value}
+                  onChange={handleGenderChange}
+                  checked={genderFilters.includes(gender.value)}
                 />
-                ${price} ({priceCounts[price]})
+                {gender.value}
               </label>
             ))}
           </div>
-
-          <div className="filters-section filters-title">Price</div>
-          <div className="filters-section filters-title"></div>
         </div>
         <HorseProducts {...props} />
       </div>

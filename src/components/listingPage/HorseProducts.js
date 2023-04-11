@@ -24,6 +24,7 @@ const HorseProducts = (props) => {
             <h3>Horsename: {horse.name}</h3>
             <p className="description">{horse.description}</p>
             <p>Breed: {horse.breed}</p>
+            <p>Gender: {horse.gender}</p>
             <p>Price: £{horse.price}</p>
           </div>
         </Link>
