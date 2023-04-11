@@ -6,67 +6,71 @@ import result from "../../pages/api/horsedata";
 
 import ShoppingList from "./TestFilters";
 
+const products = [
+  { name: "Product 1", category: "Category A", price: 10 },
+  { name: "Product 2", category: "Category A", price: 15 },
+  { name: "Product 3", category: "Category B", price: 20 },
+  { name: "Product 4", category: "Category B", price: 25 },
+  { name: "Product 5", category: "Category C", price: 30 },
+  { name: "Product 6", category: "Category C", price: 35 },
+];
+
+const countBy = (arr, key) =>
+  arr.reduce((count, item) => {
+    const value = item[key];
+    count[value] = (count[value] || 0) + 1;
+    return count;
+  }, {});
+
 const Filters = () => {
   const [horseItems, setHorseItems] = useState(horseData);
-  const [isChecked, setIsChecked] = useState(true);
-  const [isCheckedPrice, setIsCheckedPrice] = useState(true);
-
   const [isActive, setActive] = useState("");
-
-  useEffect(() => {
-    const checkboxes = document.querySelectorAll(".checkbox");
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener("click", (e) => {
-        if (e.target.checked) {
-          checkboxes.forEach((otherCheckbox) => {
-            if (otherCheckbox !== checkbox) {
-              otherCheckbox.disabled = true;
-            }
-          });
-        } else {
-          checkboxes.forEach((otherCheckbox) => {
-            if (otherCheckbox !== checkbox) {
-              otherCheckbox.disabled = false;
-            }
-          });
-        }
-      });
-    });
-  });
 
   function singleListing() {
     setActive(!isActive);
   }
 
-  let handleCheckbox = () => {
-    setIsChecked(!isChecked);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const [priceFilters, setPriceFilters] = useState([]);
 
-    if (!isChecked) {
-      setHorseItems(horseData);
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    if (e.target.checked) {
+      setCategoryFilters([...categoryFilters, category]);
+    } else {
+      setCategoryFilters(categoryFilters.filter((c) => c !== category));
     }
   };
 
-  let handleRemovePrice = () => {
-    setIsCheckedPrice(!isCheckedPrice);
-
-    if (!isCheckedPrice) {
-      setHorseItems(
-        [...horseData].filter((item) => item.price >= 0 && item.price <= 500)
-      );
+  const handlePriceChange = (e) => {
+    const price = parseInt(e.target.value);
+    if (e.target.checked) {
+      setPriceFilters([...priceFilters, price]);
+    } else {
+      setPriceFilters(priceFilters.filter((p) => p !== price));
     }
   };
 
-  const handleCatergoryChange = (e) => {
-    const breed = e.target.value;
-    setHorseItems(
-      [...horseItems].filter((horseData) => horseData.breed === breed)
-    );
-  };
+  const filteredProducts = products.filter((product) => {
+    if (
+      categoryFilters.length > 0 &&
+      !categoryFilters.includes(product.category)
+    ) {
+      return false;
+    }
+    if (priceFilters.length > 0 && !priceFilters.includes(product.price)) {
+      return false;
+    }
+    return true;
+  });
 
   let props = {
-    horseItems: horseItems,
+    horseItems: filteredProducts,
     isActive: isActive,
   };
+
+  const categoryCounts = countBy(products, "category");
+  const priceCounts = countBy(products, "price");
 
   return (
     <div>
@@ -94,65 +98,40 @@ const Filters = () => {
             </button>
           </div>
           <div className="filters-section filters-title">
-            <b>Breed</b>
             <div>
-              <form>
-                {result.map((breed) => {
-                  return (
-                    <div className="filters-checkbox" key={breed.name}>
-                      <input
-                        className="checkbox"
-                        type="checkbox"
-                        value={breed.name}
-                        onCheck={isChecked}
-                        onChange={handleCheckbox}
-                        onClick={handleCatergoryChange}
-                      />
-                      {breed.name} - ({breed.count})
-                    </div>
-                  );
-                })}
-              </form>
+              <h3>Category</h3>
+              {Object.keys(categoryCounts).map((category, index) => (
+                <label key={index}>
+                  <input
+                    type="checkbox"
+                    value={category}
+                    onChange={handleCategoryChange}
+                    checked={categoryFilters.includes(category)}
+                  />
+                  {category} ({categoryCounts[category]})
+                </label>
+              ))}
             </div>
+          </div>
+          <div>
+            <h3>Price</h3>
+            {Object.keys(priceCounts).map((price, index) => (
+              <label key={index}>
+                <input
+                  type="checkbox"
+                  value={price}
+                  onChange={handlePriceChange}
+                  checked={priceFilters.includes(parseInt(price))}
+                />
+                ${price} ({priceCounts[price]})
+              </label>
+            ))}
           </div>
 
           <div className="filters-section filters-title">Price</div>
-          <div className="filters-section filters-title">
-            Gender
-            <form>
-              <input
-                type="checkbox"
-                className=""
-                onCheck={isCheckedPrice}
-                onChange={handleRemovePrice}
-                onClick={() =>
-                  setHorseItems(
-                    [...horseItems].filter(
-                      (item) => item.price >= 0 && item.price <= 500
-                    )
-                  )
-                }
-              ></input>
-              Male
-              <input
-                type="checkbox"
-                className=""
-                onCheck={isCheckedPrice}
-                onChange={handleRemovePrice}
-                onClick={() =>
-                  setHorseItems(
-                    [...horseItems].filter(
-                      (item) => item.price >= 0 && item.price <= 500
-                    )
-                  )
-                }
-              ></input>
-              Female
-            </form>
-          </div>
+          <div className="filters-section filters-title"></div>
         </div>
         <HorseProducts {...props} />
-        <ShoppingList />
       </div>
     </div>
   );
