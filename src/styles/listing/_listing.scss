@@ -4,6 +4,7 @@
   flex: 1;
   column-gap: 15px;
   row-gap: 15px;
+  flex-basis: calc(100% / 3);
 
   a {
     text-decoration: none;
@@ -25,13 +26,6 @@
 
 .placeholder-img {
   display: flex;
-  color: black;
-  font-size: 2rem;
-  font-weight: bold;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-  background-color: #c4c0bf;
   justify-content: space-around;
 }
 
@@ -73,7 +67,8 @@
 }
 
 .applied-filters {
-  background: #e0dfdf;
+  background: #f1fbef;
+  color: #47b486;
   padding: 2px 9px;
   border-radius: 5px;
   margin-right: 14px;
@@ -172,4 +167,12 @@
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+}
+
+.placeholder-img {
+  img {
+    height: 250px;
+    object-fit: cover;
+    width: -webkit-fill-available;
+  }
 }
