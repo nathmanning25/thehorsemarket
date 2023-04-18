@@ -1,6 +1,3 @@
-import Filters from "../../components/filters/Filters";
-import { useFormik } from "formik";
-
 const Horse = () => {
   return (
     <div>
