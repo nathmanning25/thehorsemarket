@@ -177,7 +177,7 @@ const Filters = () => {
             <div>
               <div>
                 {appliedFilters.length > 0 ? (
-                  <div className="filters-section filters-title">
+                  <div className="filters-section">
                     <button onClick={clearAllCheckboxes}>
                       Clear All Filters
                     </button>
@@ -229,7 +229,7 @@ const Filters = () => {
                     onChange={handlePriceChange}
                     checked={priceFilters.includes(range.value)}
                   />
-                  {range.value} ({priceCounts[range.value]})
+                  £{range.value} ({priceCounts[range.value]})
                 </label>
               ))}
             </div>

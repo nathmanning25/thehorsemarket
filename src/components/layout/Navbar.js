@@ -11,7 +11,7 @@ const Navbar = () => {
   const handleMouseEnter = () => {
     const id = setTimeout(() => {
       setShowDropdown(true);
-    }, 10); // Set delay to 500 milliseconds
+    }, 500); // Set delay to 500 milliseconds
     setTimeoutId(id);
   };
 
@@ -19,7 +19,7 @@ const Navbar = () => {
     clearTimeout(timeoutId); // Clear any existing timeouts
     const id = setTimeout(() => {
       setShowDropdown(false);
-    }, 1000000); // Set delay to 500 milliseconds
+    }, 1000); // Set delay to 500 milliseconds
     setTimeoutId(id);
   };
 
@@ -55,6 +55,12 @@ const Navbar = () => {
               Wish List
               <FontAwesomeIcon icon={faHeart} className="heart-icon" />
             </li>
+            <div className="pull-right">
+              <li className="navbar-menu__links">My Account</li>
+
+              <li className="navbar-menu__links">Saved</li>
+              <li className="navbar-menu__links">Basket</li>
+            </div>
           </ul>
           {showDropdown && <Categories />}{" "}
         </div>

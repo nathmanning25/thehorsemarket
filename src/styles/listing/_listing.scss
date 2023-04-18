@@ -37,6 +37,13 @@
 
 .filters-wrapper {
   width: 300px;
+  padding: 16px 24px 16px 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  border-bottom-left-radius: unset;
+  border-bottom-right-radius: unset;
+  border-bottom: 1px solid #cdd8df;
+  height: fit-content;
 }
 
 .filters-section {
@@ -50,6 +57,19 @@
     cursor: pointer;
     display: flex;
     margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 7px;
+  }
+}
+
+.filters-bg {
+  background-color: #f2f2f2;
+
+  h1 {
+    margin-top: 0;
+    padding-top: 65px;
+    font-size: 23px;
   }
 }
 
@@ -101,9 +121,11 @@
 
 ///////////////
 .edit-listing-bar {
+  background-color: #fff;
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #cdd8df;
   margin-bottom: 2rem;
   padding: 5px 10px;
 }
@@ -175,4 +197,13 @@
     object-fit: cover;
     width: -webkit-fill-available;
   }
+}
+
+.horse-listing__card--description {
+  padding: 16px 24px 16px 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  border-bottom: 1px solid #cdd8df;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
 }

@@ -59,7 +59,7 @@ const Categories = () => {
     clearTimeout(timeoutId); // Clear any existing timeouts
     const id = setTimeout(() => {
       setShowDropdown(false);
-    }, 50000000); // Set delay to 500 milliseconds
+    }, 500); // Set delay to 500 milliseconds
     setTimeoutId(id);
   };
   return (

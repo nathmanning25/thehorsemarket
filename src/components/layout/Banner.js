@@ -9,7 +9,7 @@ function Banner() {
 
   return (
     <div className="banner">
-      <div class="container">
+      <div className="container">
         <div className="banner-wrapper">
           <p>PROMO: Free listings! Create an account at theHorseMarket</p>
           <button className="close-button" onClick={() => setIsOpen(false)}>
