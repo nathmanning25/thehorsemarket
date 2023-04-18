@@ -19,11 +19,15 @@ const HorseProducts = (props) => {
               : "horse-listing__card flex-grow flex-item"
           }
         >
-          <div className="placeholder-img">250px</div>
+          <div className="placeholder-img">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Lusitano_Hengst_%28132668445%29.jpeg"></img>
+          </div>
+
           <div className="horse-listing__card--description">
             <h3>Horsename: {horse.name}</h3>
             <p className="description">{horse.description}</p>
             <p>Breed: {horse.breed}</p>
+            <p>Gender: {horse.gender}</p>
             <p>Price: £{horse.price}</p>
           </div>
         </Link>
