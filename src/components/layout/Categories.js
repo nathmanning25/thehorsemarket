@@ -31,6 +31,12 @@ function MyComponent() {
     "Cob",
     "Colt",
     "Riding Pony",
+    "Summer Breeze",
+    "Selle Francais",
+    "Colt",
+    "Riding Pony",
+    "Summer Breeze",
+    "Selle Francais",
   ];
 
   return (
@@ -51,7 +57,7 @@ const Categories = () => {
   const handleMouseEnter = () => {
     const id = setTimeout(() => {
       setShowDropdown(true);
-    }, 350); // Set delay to 500 milliseconds
+    }, 300); // Set delay to 500 milliseconds
     setTimeoutId(id);
   };
 
