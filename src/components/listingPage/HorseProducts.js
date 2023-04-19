@@ -24,11 +24,25 @@ const HorseProducts = (props) => {
           </div>
 
           <div className="horse-listing__card--description">
-            <h3>Horsename: {horse.name}</h3>
+            <h3>{horse.name}</h3>
             <p className="description">{horse.description}</p>
-            <p>Breed: {horse.breed}</p>
-            <p>Gender: {horse.gender}</p>
-            <p>Price: £{horse.price}</p>
+            <div className="description-wrap">
+              <p>
+                <b>Breed:</b> {horse.breed}
+              </p>
+              <p>
+                <b>Gender:</b> {horse.gender}
+              </p>
+            </div>
+            <div className="description-wrap">
+              <p>
+                <b>Colour:</b> {horse.colour}
+              </p>
+              <p>
+                <b>Height:</b> {horse.height}
+              </p>
+            </div>
+            <p className="applied-filters">£{horse.price}</p>
           </div>
         </Link>
       ))}

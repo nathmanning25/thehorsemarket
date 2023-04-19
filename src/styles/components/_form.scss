@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 25%);
+  &__input {
+    border: 1px solid #cdd8df;
+    border-radius: 0.25rem;
+    margin-bottom: 20px;
+    padding: 10px 8px;
+  }
+  &__submit {
+    background-color: #5752b3;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 8px 15px;
+  }
+}

@@ -9,14 +9,31 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
 
-  const openModal = () => {
-    setShowModal(true);
+  const openModal1 = () => {
+    setShowModal1(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const closeModal1 = () => {
+    setShowModal1(false);
+  };
+
+  const openModal2 = () => {
+    setShowModal1(false);
+
+    setShowModal2(true);
+  };
+
+  const closeModal2 = () => {
+    setShowModal2(false);
+  };
+
+  const openModalSignIn = () => {
+    setShowModal2(false);
+
+    setShowModal1(true);
   };
 
   const handleMouseEnter = () => {
@@ -43,7 +60,6 @@ const Navbar = () => {
               <h1 className="nav-wrapper__brand">theHorseMarket</h1>
             </div>
             <div className="nav-right">
-              <p>Register</p>
               <button className="navPlaceAd">Place an ad</button>
             </div>
           </div>
@@ -78,10 +94,34 @@ const Navbar = () => {
                   <li className="navbar-menu__links">Saved</li>
                   <li className="navbar-menu__links">Basket</li>
                   <li className="navbar-menu__links">
-                    <p onClick={openModal}>My account</p>
-                    <Modal showModal={showModal} closeModal={closeModal}>
-                      <h2>Modal Title</h2>
-                      <p>Modal content goes here...</p>
+                    <p onClick={openModal1}>My account</p>
+                    <Modal showModal={showModal1} closeModal={closeModal1}>
+                      <h2>Sign in</h2>
+                      <p>Enter your login details here:</p>
+
+                      <div className="column-wrap">
+                        <div className="column">
+                          <form className="form">
+                            <label>Email Address:</label>
+                            <input type="input" className="form__input"></input>
+                            <label>Password:</label>
+                            <input type="input" className="form__input"></input>
+                            <button className="form__submit">Sign in</button>
+                          </form>
+                          <p>Forgot your password?</p>
+                        </div>
+                        <div className="column">
+                          <p>New to theHorseMarket?</p>
+                        </div>
+                      </div>
+
+                      <h2>Not registered? Create an account now</h2>
+                      <button onClick={openModal2}>Open Modal 2</button>
+                    </Modal>
+                    <Modal showModal={showModal2} closeModal={closeModal2}>
+                      <h2>new to theHorseMarket? Register here:</h2>
+                      <p>Create an account at the #1 horsey market</p>
+                      <button onClick={openModalSignIn}>Open Modal 1</button>
                     </Modal>
                   </li>
                 </div>

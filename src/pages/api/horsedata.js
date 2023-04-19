@@ -22,6 +22,7 @@ export const horseData = [
     colour: "Tan",
     gender: "Male",
     price: "50",
+    height: "13 Hands",
   },
   {
     id: 3,
@@ -30,6 +31,7 @@ export const horseData = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     gender: "Female",
     price: "9725",
+    height: "10 Hands",
   },
   {
     id: 4,
@@ -38,6 +40,7 @@ export const horseData = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     gender: "Female",
     price: "15123112313",
+    height: "11 Hands",
   },
   {
     id: 5,
@@ -46,6 +49,7 @@ export const horseData = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     gender: "Female",
     price: "320",
+    height: "15 Hands",
   },
   {
     id: 6,

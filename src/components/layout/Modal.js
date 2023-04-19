@@ -16,12 +16,15 @@ const Modal = ({ showModal, closeModal, children }) => {
     }
   };
   return (
-    <div className="modal-overlay" onClick={handleClickOutside}>
+    <div
+      className={`modal-overlay ${showModal ? "visible" : ""}`}
+      onClick={handleClickOutside}
+    >
       <div ref={modalContentRef} className="modal-content">
-        {children}
         <button className="modal-close" onClick={closeModal}>
-          Close
+          X
         </button>
+        {children}
       </div>
     </div>
   );
